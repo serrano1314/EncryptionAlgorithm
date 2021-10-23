@@ -1,7 +1,6 @@
-#ENCRYPTING METHOD USING INCREMENTING ASCII 
 from os import system
 
-
+# ENCRYPTING METHOD USING INCREMENTING ASCII 
 def encrypt(passed_string,key,location):
     encrypted_string = ""
     for ch in passed_string:
@@ -9,11 +8,6 @@ def encrypt(passed_string,key,location):
       
     with open(location,'w+',encoding="utf-8") as f:  
         f.writelines(encrypted_string)
-        f.seek(0)
-        print("ENCRPYTED: ",f.readline())
-    
-    print("Message Sent...")
-    system('pause')
 
 
 def decrypt(key,location):
@@ -28,9 +22,26 @@ def decrypt(key,location):
 
     return decrypted_string
 
+
 def sendMessage(location):
     my_string = input("Type Message: ")
-    
+    encrypt(my_string,get_key(),location)
+    print("Message Sent...")
+    system('pause')
+
+
+def receiveMessage(location):
+    decrypted_string = decrypt(get_key(),location)
+    if decrypted_string:
+        print("ENCRYPTED MESSAGE BASED ON YOUR KEY:")
+        print(decrypted_string,"\n\n")
+    else:
+        print("Location Not Found")
+
+    system('pause')
+
+
+def get_key():
     while(True):
         try:
             my_key = int(input("Encryption Key (Integer): "))
@@ -41,21 +52,11 @@ def sendMessage(location):
             print("Please Enter an Integer greater than 0, for the key.")
             continue
 
-    encrypt(my_string,my_key,location)
+    return my_key
 
-def receiveMessage(location):
-    my_key = int(input('Encryption Key: '))
-    decrypted_string = decrypt(my_key,location)
-    if decrypted_string:
-        print("ENCRYPTED MESSAGE BASED ON YOUR KEY:")
-        print(decrypted_string,"\n\n")
-    else:
-        print("Location Not Found")
-
-    system('pause')
 
 def main():
-    location = 'internet.txt'
+    location = 'default.txt'
     while(True):
         system('cls')
         print("Current Location:",location[:-4])
@@ -68,6 +69,8 @@ def main():
         elif choice == '3':
             temp_location = input("ENTER LOCATION NAME: ")
             location = temp_location+".txt"  
+        elif choice == '4':
+            return
         else:
             continue
 
