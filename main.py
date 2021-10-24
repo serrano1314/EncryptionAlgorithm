@@ -24,9 +24,10 @@ def decrypt(key,location):
 
 
 def sendMessage(location):
-    my_string = input("Type Message: ")
+    my_string = input("Type Message: \033[94m")
+    print('\033[0m')
     encrypt(my_string,get_key(),location)
-    print("Message Sent...")
+    print("\033[92mMessage Sent...\033[0m")
     system('pause')
 
 
@@ -34,9 +35,9 @@ def receiveMessage(location):
     decrypted_string = decrypt(get_key(),location)
     if decrypted_string:
         print("ENCRYPTED MESSAGE BASED ON YOUR KEY:")
-        print(decrypted_string,"\n\n")
+        print("\033[96m",decrypted_string,"\033[0m\n\n")
     else:
-        print("Location Not Found")
+        print("\033[93mLocation Not Found\033[0m")
 
     system('pause')
 
@@ -44,7 +45,8 @@ def receiveMessage(location):
 def get_key():
     while(True):
         try:
-            my_key = int(input("Encryption Key (Integer): "))
+            my_key = int(input("Encryption Key (Integer): \033[94m"))
+            print('\033[0m')
             if my_key == 0: 
                 raise('key must greater than or equal to 1')
             break
@@ -59,7 +61,7 @@ def main():
     location = 'default.txt'
     while(True):
         system('cls')
-        print("Current Location:",location[:-4])
+        print("\033[0mCurrent Location: \033[92m",location[:-4],"\033[0m")
         print("[1] SEND A MESSAGE\n[2] RECIEVE A MESSAGE\n[3] CHANGE LOCATION NAME\n[4] EXIT")
         choice = input("Please Select Above: ")
         if choice == '1':
@@ -67,15 +69,13 @@ def main():
         elif choice == '2':
             receiveMessage(location)
         elif choice == '3':
-            temp_location = input("ENTER LOCATION NAME: ")
+            temp_location = input("ENTER LOCATION NAME: \033[92m")
             location = temp_location+".txt"  
         elif choice == '4':
             return
         else:
             continue
 
-   
-    
 
 if __name__ == "__main__":
     main()
