@@ -62,7 +62,7 @@ def main():
     while(True):
         system('cls')
         print("\033[0mCurrent Location: \033[92m",location[:-4],"\033[0m")
-        print("[1] SEND A MESSAGE\n[2] RECIEVE A MESSAGE\n[3] CHANGE LOCATION NAME\n[4] EXIT")
+        print("[1] SEND A MESSAGE\n[2] RECIEVE A MESSAGE\n[3] CHANGE LOCATION\n[4] EXIT")
         choice = input("Please Select Above: ")
         if choice == '1':
             sendMessage(location)
